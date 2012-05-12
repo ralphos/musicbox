@@ -1,9 +1,3 @@
-class Song < ActiveRecord::Base
-  attr_accessible :artist, :link, :name, :user_id, :tag
-  belongs_to :user
-  
-  scope :newest, order('created_at desc')
-end
 # == Schema Information
 #
 # Table name: songs
@@ -18,3 +12,9 @@ end
 #  updated_at :datetime        not null
 #
 
+class Song < ActiveRecord::Base
+  attr_accessible :artist, :link, :name, :user_id, :tag
+  belongs_to :user
+  
+  scope :newest, order('created_at desc')
+end

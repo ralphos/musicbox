@@ -16,4 +16,8 @@ class SongsController < ApplicationController
       render :back, notice: "Sorry we couldn't add your song."
     end
   end
+  
+  def show
+    @songs = Song.where(:user_id => current_user.id).newest
+  end
 end

@@ -15,5 +15,5 @@ Musicbox::Application.routes.draw do
   
   match '/songs/new'=>'songs#new', :as=> :new_song
   
-
+  match 'songs/show'=>'songs#show' #=> will reroute this once relation with playlists defined
 end
