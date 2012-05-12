@@ -8,6 +8,18 @@
 </head>
 <body>
 
+<div class="flash">
+  <ul>
+    <% flash.each do |key, msg| %>
+    <%= content_tag :li, msg, id: key %>
+    <% end %>
+  </ul>
+</div>
+
+<div class="hmenu">
+  <%= render 'shared/navigation' %>
+</div>
+
 <%= yield %>
 
 </body>

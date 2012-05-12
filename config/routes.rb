@@ -1,4 +1,7 @@
 Musicbox::Application.routes.draw do
+  
+  root :to => 'pages#landing'
+
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'
 
