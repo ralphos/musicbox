@@ -1,7 +1,11 @@
 class SongsController < ApplicationController
   
   def index
-    @songs = current_user.songs
+    if params[:search]
+      @songs=Song.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
+    else
+      @songs=current_user.songs
+    end
   end
   
   def new
@@ -19,5 +23,11 @@ class SongsController < ApplicationController
   
   def show
     @songs = Song.where(:user_id => current_user.id).newest
+  end
+  
+  def destroy
+      song=Song.find_by_id(params[:id])
+      song.delete
+      redirect_to songs_path
   end
 end

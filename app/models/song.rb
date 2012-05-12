@@ -19,4 +19,12 @@ class Song < ActiveRecord::Base
   has_many :users, :through => :playlists
   
   scope :newest, order('created_at desc')
+  
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end
