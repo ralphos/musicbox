@@ -18,6 +18,7 @@
 
 <h1>Discovering what your world is listening to</h1>
 
+<h4 id="now_playing"></h4>
 <ul style="display: inline-block; list-style-type: none;">
 <% @songs.each do |song| %>
 	<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
@@ -50,27 +51,50 @@ var song_links = [
 		<% @songs.each do |song| %>
 			{
 				id: "<%= song.id %>",
+				name: "<%= song.name %>",
+				artist: "<%= song.artist %>",
 				link: "<%= song.link %>"
 		  }
 			<% if song != @songs.last %>,<% end %>
 		<% end %>
 ];
 
+var audioElement = document.createElement('audio');
+var status = "pause";
+var source = "";
+
+
 $('.song_preview').click(function(){
 	var id = $(this).attr('id');
-	var source = "";
-	var len = song_links.length;
 	
+	var len = song_links.length;
 	for(var i=0; i < len; i++){
 		if (song_links[i]['id'] == id){
-			source = song_links[i]['link'];
+			var new_source = song_links[i]['link'];
+			var artist = song_links[i]['artist'];
+			var name = song_links[i]['name'];
 		}
 	}
 	
-	var audioElement = document.createElement('audio');
-	audioElement.setAttribute('src', source);
-	audioElement.play();
-	
+	if (new_source == source){
+		if (status == "pause"){
+			audioElement.play();
+			status = "play";
+			$("#now_playing").html('Now playing: '+name+' by '+artist);
+		}
+		else{
+			audioElement.pause();
+			status = "pause";
+			$("#now_playing").html('Paused: '+name+' by '+artist);
+		}
+	}
+	else if (new_source != source){
+		audioElement.setAttribute('src', new_source);
+		source = new_source;
+		audioElement.play();
+		status = "play";
+		$("#now_playing").html('Now playing: '+name+' by '+artist);
+	}
 });
 
 

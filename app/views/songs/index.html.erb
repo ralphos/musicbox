@@ -19,6 +19,8 @@
   <%= link_to "Add a Song", new_song_url %>
 </div>
 
+<h4 id="now_playing"></h4>
+
 <div class="songs">
   <% @songs.each do|song| %>
   <div class="song">
@@ -33,14 +35,12 @@
 			<% end %>
 		</p>
 		<% end %>
-		<%= image_tag artist.images['medium'] %>
-		<a id="<%= song.id %>" class= "play">></a> <a id="<%= song.id %>" class="pause">||</a>
+		<%= image_tag artist.images['medium'] %><br />
+		<%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{song.id}", :style => 'max-width: 50px;' %>
 		<span><%= link_to "Delete Song",song_path(song.id),:confirm=>"Delete this song?",  :method=>:delete%></span>
   </div><!-- //song -->
 <% end %>
 </div><!-- //songs -->
-
-
 
 <script type="text/javascript">
 
@@ -48,34 +48,57 @@ var song_links = [
 		<% @songs.each do |song| %>
 			{
 				id: "<%= song.id %>",
+				name: "<%= song.name %>",
+				artist: "<%= song.artist %>",
 				link: "<%= song.link %>"
 		  }
 			<% if song != @songs.last %>,<% end %>
 		<% end %>
 ];
 
-$('.play').click(function(){
-	var id = $(this).attr('id');
-	var source = "";
-	var len = song_links.length;
+var audioElement = document.createElement('audio');
+var status = "pause";
+var source = "";
+var play_src = "http://marketingtech101.com/images/play-button-1.png";
+var pause_src = "http://cdn1.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-pause.png";
+var id = "";
+
+$('.song_control').click(function(){
+	var new_id = $(this).attr('id');
 	
+	var len = song_links.length;
 	for(var i=0; i < len; i++){
-		if (song_links[i]['id'] == id){
-			source = song_links[i]['link'];
+		if (song_links[i]['id'] == new_id){
+			var new_source = song_links[i]['link'];
+			var artist = song_links[i]['artist'];
+			var name = song_links[i]['name'];
 		}
 	}
 	
-	var audioElement = document.createElement('audio');
-	audioElement.setAttribute('id', 'player');
-	audioElement.setAttribute('src', source);
-	audioElement.play();
-	
-});
-
-$('.pause').click(function(){
-	var audioElement = document.getElementById('player');
-	audioElement.pause();
-	console.log('hello');
+	if (new_source == source){
+		if (status == "pause"){
+			audioElement.play();
+			status = "play";
+			$('#'+id).attr('src', pause_src);
+			$("#now_playing").html('Now playing: '+name+' by '+artist);
+		}
+		else{
+			audioElement.pause();
+			status = "pause";
+			$('#'+id).attr('src', play_src);
+			$("#now_playing").html('Paused: '+name+' by '+artist);
+		}
+	}
+	else if (new_source != source){
+		audioElement.setAttribute('src', new_source);
+		source = new_source;
+		audioElement.play();
+		status = "play";
+		$('#'+new_id).attr('src', pause_src);
+		$("#now_playing").html('Now playing: '+name+' by '+artist);
+		$('#'+id).attr('src', play_src);
+		id = new_id;
+	}
 });
 
 
