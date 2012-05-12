@@ -4,7 +4,11 @@ require 'json'
 class SongsController < ApplicationController
   
   def index
-    @songs = current_user.songs
+    if params[:search]
+      @songs=Song.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
+    else
+      @songs=current_user.songs
+    end
   end
   
   def new
@@ -35,6 +39,7 @@ class SongsController < ApplicationController
     @songs = Song.where(:user_id => current_user.id).newest
   end
   
+
   def search
     @q = params[:search]
     access_token = "30481e86e78f0aee64e78765c33c4ef6"
@@ -42,4 +47,11 @@ class SongsController < ApplicationController
     @results = JSON.parse(open("http://tinysong.com/s/#{@q}?format=json&limit=10&key=#{access_token}").read)
   
   end    
+
+  def destroy
+      song=Song.find_by_id(params[:id])
+      song.delete
+      redirect_to songs_path
+  end
+
 end

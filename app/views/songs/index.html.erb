@@ -6,6 +6,15 @@
 <% end %>
 </header>
 
+<div class="search">
+<%= form_tag songs_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search your songs", :name => nil %>
+  </p>
+<% end %>
+</div>
+
 <div class="songs">
   <% @songs.each do|song| %>
   <div class="song">
@@ -22,6 +31,7 @@
 		<% end %>
 		<%= image_tag artist.images['medium'] %>
 		<a id="<%= song.id %>" class= "play">></a> <a id="<%= song.id %>" class="pause">||</a>
+		<span><%= link_to "Delete Song",song_path(song.id),:confirm=>"Delete this song?",  :method=>:delete%></span>
   </div><!-- //song -->
 <% end %>
 </div><!-- //songs -->

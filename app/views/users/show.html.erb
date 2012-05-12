@@ -2,6 +2,16 @@
   <h1>Musicbox</h1>
 </header>
 
+<div class="search">
+<%= form_tag user_path(current_user.id), :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search your playlists", :name => nil %>
+  </p>
+<%= link_to :back %>
+<%end%>
+</div>
+
 <div class="profile-header">
   <%= image_tag current_user.pic %>
   <div class="name-section">
