@@ -7,6 +7,8 @@ gem 'rails', '3.2.3'
 
 gem 'thin'
 
+gem 'omniauth-twitter'
+
 group :development do
   gem 'sqlite3'
 end
