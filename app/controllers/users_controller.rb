@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   end
   
   def index
-    @users = User.all
+     if params[:search]
+        @users=User.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
+      else
+        @users = User.order('created_at desc')
+      end
+    
   end
 end
