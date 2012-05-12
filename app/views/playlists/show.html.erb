@@ -1,0 +1,18 @@
+<header>
+<h1>Musicbox</h1>
+</header>
+
+<div class="songs">
+  <% current_user.songs.each do |song| %>
+  <div class="song">
+    <% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
+    <h3><%= song.name %></h3>
+    <h4><%= link_to song.artist, artist.url %></h4>
+    <h6>Tagged by: <%= link_to song.users.first, "/user/#{song.users.first}" %></h6>
+    <audio controls="controls">
+      <source src="<%= song.link %>" type="audio/mp3" />
+      Your browser does not support the audio tag.
+    </audio>
+  </div><!-- //song -->
+<% end %>
+</div><!-- //songs -->

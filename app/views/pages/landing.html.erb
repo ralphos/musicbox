@@ -11,6 +11,19 @@
 	</div>
 <% end %>
 
+<h1>Discovering what your world is listening to</h1>
+
+<ul style="display: inline-block; list-style-type: none;">
+<% @songs.each do |song| %>
+	<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
+	<li class="song_preview" id="<%= song.id %>" style="float: left; padding: 5px;">
+		<%= image_tag artist.images['large'] %><br />
+		<%= song.name %><br />
+		<em>by</em> <%= song.artist %>
+	</li>
+<% end %>
+</ul>
+
 <div id="crossriderInstallButton"></div>
 
 <script type="text/javascript" src="https://crossrider.cotssl.net/javascripts/installer/installer.js"></script>
@@ -27,6 +40,35 @@ var _cr_button = new __CRI.button({
 });
 
 //__CRI.install(); //use this if you want to use your own button
+
+var song_links = [ 
+		<% @songs.each do |song| %>
+			{
+				id: "<%= song.id %>",
+				link: "<%= song.link %>"
+		  }
+			<% if song != @songs.last %>,<% end %>
+		<% end %>
+];
+
+$('.song_preview').click(function(){
+	var id = $(this).attr('id');
+	var source = "";
+	var len = song_links.length;
+	
+	for(var i=0; i < len; i++){
+		if (song_links[i]['id'] == id){
+			source = song_links[i]['link'];
+		}
+	}
+	
+	var audioElement = document.createElement('audio');
+	audioElement.setAttribute('src', source);
+	audioElement.play();
+	
+});
+
+
 </script>
 
 
