@@ -7,7 +7,7 @@ class SongsController < ApplicationController
     if params[:search]
       @songs=Song.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
     else
-      @songs=current_user.songs
+      @songs = current_user.songs.order('created_at DESC')
     end
   end
   

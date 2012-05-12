@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def landing
-    @songs = Song.limit(10)
+    @songs = Song.order('created_at DESC').limit(5)
   end
 
 
