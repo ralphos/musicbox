@@ -1,7 +1,7 @@
 <ul>
   <% if user_signed_in? %>
     <li>
-    <%= link_to 'Logout', signout_path %>        
+    	Welcome <%= current_user.name %> | <%= link_to 'Logout', signout_path %>        
     </li>
     <!-- <li>
     Logged in as <%= current_user.name %>

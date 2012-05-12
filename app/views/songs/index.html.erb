@@ -5,10 +5,12 @@
 <div class="songs">
   <% @songs.each do|song| %>
   <div class="song">
+		<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
     <h3><%= song.name %></h3>
-    <h4><%= song.artist %></h4>
+    <h4><%= link_to song.artist, artist.url %></h4>
+		<h6>Tagged by: <%= link_to song.user.name, "/user/#{song.user.id}" %></h6>
     <audio controls="controls">
-      <source src="<%=song.link%>" type="audio/mp3" />
+      <source src="<%= song.link %>" type="audio/mp3" />
       Your browser does not support the audio tag.
     </audio>
   </div><!-- //song -->

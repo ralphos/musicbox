@@ -2,9 +2,31 @@
   <h1>Musicbox</h1>
 </header>
 
-<div class='twitter-login'>
-  <%= link_to('Twitter Login', signin_twitter_path)  %>  
-</div>
-<div class='facebook-login'>
-  <%= link_to('Facebook Login', signin_facebook_path)  %>
-</div>
+<% if !user_signed_in? %>
+	<div class='twitter-login'>
+	  <%= link_to('Twitter Login', signin_twitter_path)  %>  
+	</div>
+	<div class='facebook-login'>
+	  <%= link_to('Facebook Login', signin_facebook_path)  %>
+	</div>
+<% end %>
+
+<div id="crossriderInstallButton"></div>
+
+<script type="text/javascript" src="https://crossrider.cotssl.net/javascripts/installer/installer.js"></script>
+
+<script type="text/javascript">
+var __CRI = new crossriderInstaller({
+	app_id:5004,
+	app_name:'musicbox'
+});
+
+var _cr_button = new __CRI.button({
+	button_size:'small',
+	color:'blue'
+});
+
+//__CRI.install(); //use this if you want to use your own button
+</script>
+
+

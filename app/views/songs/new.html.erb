@@ -10,7 +10,7 @@
 	 <%= form.text_field :artist%><br>
 	
 	 <%= form.label :link, "Link:"%>
-	 <%= form.text_field :link%><br>
+	 <%= form.text_field :link, :value => params[:link] %><br>
 
 	
 	<%= form.submit%>
