@@ -1,5 +1,7 @@
 Musicbox::Application.routes.draw do
   
+  get "songs/index"
+
   root :to => 'pages#landing'
 
   match '/auth/:provider/callback' => 'sessions#create'
@@ -7,4 +9,6 @@ Musicbox::Application.routes.draw do
 
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
+  
+  match '/songs' =>'songs#index'
 end
