@@ -1,0 +1,15 @@
+<header>
+	<h1>Musicbox</h1>
+</header>
+
+<p>Showing <%= pluralize(@users.count, 'user') %></p>
+
+<ul>
+<% @users.each do |user| %>
+	<li>
+		<%= image_tag user.pic %>
+		<%= user.name %>
+		| <%= link_to "Follow" %>
+	</li>
+<% end %>
+</ul>

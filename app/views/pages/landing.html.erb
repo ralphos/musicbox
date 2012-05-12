@@ -1,5 +1,8 @@
 <header>
   <h1>Musicbox</h1>
+	<p><%= link_to 'My songs', songs_path %></p>
+	<p><%= link_to 'My profile', user_path(current_user.id) %>
+	<p><%= link_to 'Find people', users_path %>
 </header>
 
 <% if !user_signed_in? %>

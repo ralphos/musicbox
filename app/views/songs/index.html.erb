@@ -1,6 +1,6 @@
 <header>
 <h1>Musicbox</h1>
-<%= form_tag('/song_search', :method => :post) do %>
+<% form_tag('/song_search', :method => :post) do %>
 	<%= text_field_tag :search %>
 	<%= submit_tag :search %>
 <% end %>
@@ -13,6 +13,10 @@
     <%= submit_tag "Search your songs", :name => nil %>
   </p>
 <% end %>
+</div>
+
+<div class="new-song" style="width: 100px; margin: auto">
+  <%= link_to "Add a Song", new_song_url %>
 </div>
 
 <div class="songs">
@@ -36,9 +40,7 @@
 <% end %>
 </div><!-- //songs -->
 
-<div class="new-song" style="width: 100px; margin: auto">
-  <%= link_to "Add a Song", new_song_url %>
-</div>
+
 
 <script type="text/javascript">
 

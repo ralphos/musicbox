@@ -13,10 +13,24 @@
 	 <%= form.text_field :link, :value => params[:link] %><br>
 	
 	 <%= label_tag 'Playlist: ' %>
-	 <%= text_field_tag :playlist, nil, :placeholder => 'Type in a list dude...', :autocomplete => 'off' %><br />
+	 <%= text_field_tag :playlist, nil, :id => "playlist", :placeholder => 'Type in a list dude...', :autocomplete => 'off' %><br />
 
 	
-	<%= form.submit%>
+	<%= form.submit %>
 
 	
 <% end %>
+
+<script>
+	$(function() {
+		var availableTags = [
+			<% current_user.playlists.each do |playlist| %>
+				"<%= playlist.title %>"
+				<% if playlist != current_user.playlists.last %>,<% end %>
+			<% end %>
+		];
+		$( "#playlist" ).autocomplete({
+			source: availableTags
+		});
+	});
+	</script>
