@@ -15,8 +15,8 @@
 class Song < ActiveRecord::Base
   attr_accessible :artist, :link, :name, :user_id
   
-  has_many :playlists
-  has_many :users, :through => :playlists
+  has_and_belongs_to_many :playlists
+  belongs_to :user
   
   scope :newest, order('created_at desc')
 end

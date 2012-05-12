@@ -11,6 +11,9 @@
 	
 	 <%= form.label :link, "Link:"%>
 	 <%= form.text_field :link, :value => params[:link] %><br>
+	
+	 <%= label_tag 'Playlist: ' %>
+	 <%= text_field_tag :playlist, nil, :placeholder => 'Type in a list dude...', :autocomplete => 'off' %><br />
 
 	
 	<%= form.submit%>

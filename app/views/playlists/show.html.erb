@@ -3,7 +3,7 @@
 </header>
 
 <div class="songs">
-  <% current_user.songs.each do |song| %>
+  <% @songs.each do |song| %>
   <div class="song">
     <% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
     <h3><%= song.name %></h3>

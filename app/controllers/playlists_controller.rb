@@ -5,5 +5,7 @@ class PlaylistsController < ApplicationController
   end
   
   def show
+    playlist = Playlist.find_by_id(params[:id])
+    @songs = playlist.songs
   end
 end

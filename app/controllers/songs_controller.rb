@@ -12,7 +12,18 @@ class SongsController < ApplicationController
   end
   
   def create
-    @song = Song.new(params[:song])
+    @song = Song.create(params[:song])
+    
+    @playlist = Playlist.find_by_title(params[:playlist])
+    if @playlist.nil?
+      #Create a new playlist
+      playlist = Playlist.create(:user_id => current_user.id, :title => params[:playlist])
+      
+      playlist.songs << @song
+    else
+      @playlist.songs << @song
+    end
+  
     if @song.save
       redirect_to '/songs', notice: "Song added!"
     else
