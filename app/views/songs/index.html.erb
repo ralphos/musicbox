@@ -3,5 +3,13 @@
 <% @songs.each do|song|%>
 <%= song.name%><br>
 <%= song.artist%><br>
-<%= song.link%><br>
+<audio controls="controls">
+  <source src="<%=song.link%>" type="audio/mp3" />
+  Your browser does not support the audio tag.
+</audio>
+<br><br><hr>
+
+
 <%end%>
+
+<%=link_to "Add a Song", new_song_url%>
