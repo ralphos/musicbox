@@ -17,5 +17,7 @@ Musicbox::Application.routes.draw do
   post '/get-song' => 'pages#get-song'
   
   match 'songs/show'=>'songs#show' #=> will reroute this once relation with playlists defined
+  
+  post '/song_search' => 'songs#search'
 
 end

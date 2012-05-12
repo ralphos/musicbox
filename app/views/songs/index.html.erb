@@ -1,5 +1,9 @@
 <header>
 <h1>Musicbox</h1>
+<%= form_tag('/song_search', :method => :post) do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag :search %>
+<% end %>
 </header>
 
 <div class="songs">

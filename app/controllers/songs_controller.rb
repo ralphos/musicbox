@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class SongsController < ApplicationController
   
   def index
@@ -20,4 +23,12 @@ class SongsController < ApplicationController
   def show
     @songs = Song.where(:user_id => current_user.id).newest
   end
+  
+  def search
+    @q = params[:search]
+    access_token = "30481e86e78f0aee64e78765c33c4ef6"
+    
+    @results = JSON.parse(open("http://tinysong.com/s/#{@q}?format=json&limit=10&key=#{access_token}").read)
+  
+  end    
 end

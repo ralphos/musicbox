@@ -1,0 +1,11 @@
+<p><%= pluralize(@results.count, 'result') %> for <%= @q %></p>
+
+<ul>
+	<% @results.each do |result| %>
+		<li>
+			<%= result["SongName"] %> by <%= result["ArtistName"] %>
+			| <%= link_to 'Add', "/add-song?link=#{result['Url']}" %>
+			
+		</li>
+	<% end %>
+</ul>
