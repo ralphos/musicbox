@@ -34,10 +34,10 @@ class Song < ActiveRecord::Base
     end
   end
   
-  def self.from_users_followed_by(user)
-      followed_user_ids = user.followed_user_ids.join(', ')
-      where("user_id IN (?) OR user_id = ?", followed_user_ids, user)
-  end
+  # def self.from_users_followed_by(user)
+  #     followed_user_ids = user.followed_user_ids.join(', ')
+  #     where("user_id IN (?) OR user_id = ?", followed_user_ids, user)
+  # end
   
   private
 
