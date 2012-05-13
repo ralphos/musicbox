@@ -392,5 +392,17 @@ h1, h2, h3, h4, h5 {
 
 }
 
+footer {
+	
+	padding: 10px;
+	text-align:center;
+	a{
+		color:gray;
+		text-decoration:none;
+	}
+	a:hover{
+		color:red;
+	};
+}
 
 
