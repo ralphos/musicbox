@@ -1,7 +1,12 @@
 <header>
 	<h1>Musicbox</h1>
+<%= form_tag('/song_search', :method => :post) do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag "Add a song" %>
+<% end %>
 </header>
 
+<%= link_to "Play all my feed", play_all_path %>
 
 <div class="feed">
   <% @feed_items.each do |item| %>
@@ -20,8 +25,77 @@
   		    <% end %>
   		  <% end %>
   		  </h5>
+				<% if is_number?(item.link) %>
+								        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
+				<% else %>
+					<%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{item.id}", :style => 'max-width: 50px;' %>
+				<% end %>
 		</div><!-- //item-details -->
 	</div><!-- //feed_item -->
 <% end %>
 </div><!-- //feed -->
+
+<script type="text/javascript">
+
+var song_links = [ 
+		<% @feed_items.each do |song| %>
+			{
+				id: "<%= song.id %>",
+				name: "<%= song.name %>",
+				artist: "<%= song.artist %>",
+				link: "<%= song.link %>"
+		  }
+			<% if song != @feed_items.last %>,<% end %>
+		<% end %>
+];
+
+var audioElement = document.createElement('audio');
+var status = "pause";
+var source = "";
+var play_src = "http://marketingtech101.com/images/play-button-1.png";
+var pause_src = "http://cdn1.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-pause.png";
+var id = "";
+
+$('.song_control').click(function(){
+	var new_id = $(this).attr('id');
+	
+	var len = song_links.length;
+	for(var i=0; i < len; i++){
+		if (song_links[i]['id'] == new_id){
+			var new_source = song_links[i]['link'];
+			var artist = song_links[i]['artist'];
+			var name = song_links[i]['name'];
+		}
+	}
+	
+	if (new_source == source){
+		if (status == "pause"){
+			audioElement.play();
+			status = "play";
+			$('#'+id).attr('src', pause_src);
+			$("#now_playing").html('Now playing: '+name+' by '+artist);
+		}
+		else{
+			audioElement.pause();
+			status = "pause";
+			$('#'+id).attr('src', play_src);
+			$("#now_playing").html('Paused: '+name+' by '+artist);
+		}
+	}
+	else if (new_source != source){
+		audioElement.setAttribute('src', new_source);
+		source = new_source;
+		audioElement.play();
+		status = "play";
+		$('#'+new_id).attr('src', pause_src);
+		$("#now_playing").html('Now playing: '+name+' by '+artist);
+		$('#'+id).attr('src', play_src);
+		id = new_id;
+	}
+});
+
+
+
+
+</script>
 

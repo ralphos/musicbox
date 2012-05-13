@@ -31,7 +31,7 @@ class SongsController < ApplicationController
     end
   
     if @song.save
-      redirect_to '/songs', notice: "Song added!"
+      redirect_to '/feed', notice: "Song added!"
     else
       redirect_to '/songs/new', notice: "Sorry we couldn't add your song."
     end
