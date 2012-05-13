@@ -1,22 +1,28 @@
 <header>
 <h1>Musicbox</h1>
-<%= form_tag('/song_search', :method => :post) do %>
-	<%= text_field_tag :search %>
-	<%= submit_tag "Add a song" %>
-<% end %>
+
 </header>
 
 <div class="search">
-<%= form_tag users_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search for other users", :name => nil %>
-  </p>
-<% end %>
+	
+	<%= form_tag users_path, :method => 'get' do %>
+		  <p>
+	    <%= text_field_tag :search, params[:search] %>
+	    <%= submit_tag "Search Other Users", :name => nil %>
+	  </p>
+	<% end %>
+
+	<%= form_tag('/song_search', :method => :post) do %>
+		<p>
+			<%= text_field_tag :search %>
+			<%= submit_tag "Get Song from Grooveshark!" %>
+		</p>
+	<% end %>
+
 </div>
 
-<div class="new-song" style="width: 100px; margin: auto">
-  <%= link_to "Add a Song", new_song_url %>
+<div class="new-song" style="width: 150px; margin: auto">
+  <%= link_to "Add Song Manually", new_song_url %>
 	<%= link_to "Play all my feed", play_all_path %>
 </div>
 
