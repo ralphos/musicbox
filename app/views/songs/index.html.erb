@@ -1,54 +1,48 @@
-<header>
-<h1>Musicbox</h1>
-
-</header>
-
-<div class="search">
-	
-	<%= form_tag users_path, :method => 'get' do %>
-		  <p>
-	    <%= text_field_tag :search, params[:search] %>
-	    <%= submit_tag "Search Other Users", :name => nil %>
-	  </p>
-	<% end %>
-
-	<%= form_tag('/song_search', :method => :post) do %>
-		<p>
-			<%= text_field_tag :search %>
-			<%= submit_tag "Get Song from Grooveshark!" %>
-		</p>
-	<% end %>
-
-</div>
-
-<div class="new-song" style="width: 150px; margin: auto">
-  <%= link_to "Add Song Manually", new_song_url %>
-	<%= link_to "Play all my feed", play_all_path %>
-</div>
+<!-- <div class="new-song" style="width: 150px; margin: auto">
+  <%=  link_to "Add Song Manually", new_song_url %>
+  <%=  link_to "Play all my feed", play_all_path %>
+</div> -->
 
 <h4 id="now_playing"></h4>
 
-<div class="songs">
+<div class="feed">
+  
+  <h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %></h3>
+  
   <% @songs.each do|song| %>
   <div class="song">
 		<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
-    <h3><%= song.name %></h3>
+		<%= image_tag artist.images['medium'] %>
+			<span><%= link_to "X",song_path(song.id),:confirm=>"Delete this song?",  :method=>:delete, style: 'color: #222; text-decoration: none; font-size: 12px; float: right; margin-top: 10px; margin-right: 10px'%></span>
+    <div class="item-details">
+      <h3><%= song.name %></h3>
+      <p><%= song.artist %><p>
+      <% if song.playlists.any? %>
+        <h5><span>Added to:</span>
+          <% song.playlists.each do |playlist| %>
+		    <%= link_to playlist.title, playlist_path(playlist) %>
+		    <% end %>
+		    </h5>
+  		<% end %>
+  
+  		  
+    <!-- <h3><%= song.name %></h3>
     <h4><%= link_to song.artist, artist.url %></h4>
-		<h6>Tagged by: <%= link_to current_user.name, user_path(current_user) %></h6>
-		<% if song.playlists.any? %>
-		<p>Playlists: 
-			<% song.playlists.each do |playlist| %>
-				<%= link_to playlist.title, playlist_path(playlist.id) %>
-			<% end %>
-		</p>
-		<% end %>
-		<%= image_tag artist.images['medium'] %><br />
+    <h6>Tagged by: <%= link_to current_user.name, user_path(current_user) %></h6>
+    <% if song.playlists.any? %>
+    <p>Playlists: 
+      <% song.playlists.each do |playlist| %>
+        <%= link_to playlist.title, playlist_path(playlist.id) %>
+      <% end %>
+    </p>
+    <% end %>
+    <%= image_tag artist.images['medium'] %><br /> -->
 		<% if is_number?(song.link) %>
 						        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
 		<% else %>
-			<%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{song.id}", :style => 'max-width: 50px;' %>
+      <!-- <%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{song.id}", :style => 'max-width: 50px;' %> -->
 		<% end %>
-		<span><%= link_to "Delete Song",song_path(song.id),:confirm=>"Delete this song?",  :method=>:delete%></span>
+
   </div><!-- //song -->
 <% end %>
 </div><!-- //songs -->

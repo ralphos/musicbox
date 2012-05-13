@@ -1,14 +1,8 @@
-<header>
-	<h1>Musicbox</h1>
-<%= form_tag('/song_search', :method => :post) do %>
-	<%= text_field_tag :search %>
-	<%= submit_tag "Add a song" %>
-<% end %>
-</header>
-
 <%= link_to "Play all my feed", play_all_path %>
 
 <div class="feed">
+  
+  <h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %></h3>
   <% @feed_items.each do |item| %>
   <div class="feed_item">
     <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>
@@ -28,7 +22,7 @@
 				<% if is_number?(item.link) %>
 								        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
 				<% else %>
-					<%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{item.id}", :style => 'max-width: 50px;' %>
+          <!-- <%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{item.id}", :style => 'max-width: 50px;' %> -->
 				<% end %>
 		</div><!-- //item-details -->
 	</div><!-- //feed_item -->

@@ -1,12 +1,3 @@
-<header>
-  <h1>Musicbox</h1>
-<% if user_signed_in? %>
-	<p><%= link_to 'My songs', songs_path %></p>
-	<p><%= link_to 'My profile', user_path(current_user.id) %>
-	<p><%= link_to 'Find people', users_path %>
-<% end %>
-</header>
-
 
 <div class="headline">
 	<h1>Discover new music with friends</h1>

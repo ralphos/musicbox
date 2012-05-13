@@ -1,11 +1,13 @@
-<p><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></p>
 
-<ul>
+<div class="feed">
+
+<h3><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></h3>
+
 	<% @results.each do |result| %>
-		<li>
+	<div class="item-details">
 			<%= result["SongName"] %> by <%= result["ArtistName"] %>
 			| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post %>
-		</li>
-	<% end %>
-</ul>
+	</div>
+<% end %>
 
+</div><!-- //feed -->

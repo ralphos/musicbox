@@ -1,10 +1,16 @@
+<% if user_signed_in? %>
+<div class="search-bar">
+  <%= form_tag users_path, :method => 'get' do %>
+	    <%= text_field_tag :search, params[:search], placeholder: "Search users..." %>
+	<% end %>
+</div>
 <ul>
-  <% if user_signed_in? %>
-    <li>
-    	<%= link_to current_user.name, current_user %> <%= link_to 'Logout', signout_path %>        
-    </li>
-    <!-- <li>
-    Logged in as <%= current_user.name %>
-    </li> -->
-    <% end %>
+  <li>
+    <%= link_to 'My Feed', feed_path %>
+    <%= link_to 'My songs', songs_path %>
+  	<%= link_to current_user.name, current_user %> <%= link_to 'Logout', signout_path %>        
+  </li>
 </ul>
+<% end %>
+
+

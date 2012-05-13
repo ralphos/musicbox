@@ -1,0 +1,10 @@
+<header>
+	<h1>Musicbox</h1>
+	<% if user_signed_in? %>
+	<div class="search-grooveshark" style="float: right">
+  	<%= form_tag('/song_search', :method => :post) do %>
+  			<%= text_field_tag :search, nil, placeholder: "Search Songs on Grooveshark..." %>
+  	<% end %>
+  </div>
+  <% end %>
+</header>
