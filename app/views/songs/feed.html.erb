@@ -6,7 +6,11 @@
   <% @feed_items.each do |item| %>
   <div class="feed_item">
     <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>
-    <%= image_tag artist.images['medium'] %>
+    <% if artist.images['large'] == "" %>
+			<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png" %>
+		<% else %>
+			<%= image_tag artist.images['medium'] %>
+		<% end %>
     <div class="item-details">
       <h3><%= item.name %></h3>
       <p><%= item.artist %><p>
