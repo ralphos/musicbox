@@ -1,8 +1,8 @@
-<%= link_to "Play all my feed", play_all_path %>
 
 <div class="feed">
   
-  <h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %></h3>
+  <h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %> / <%= link_to "Play all", play_all_path %>
+  </h3>
   <% @feed_items.each do |item| %>
   <div class="feed_item">
     <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>

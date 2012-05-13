@@ -214,10 +214,10 @@ h1, h2, h3, h4, h5 {
 		}
 		.stats { 
 			float: right; 
-			margin-top: 7px; 
+			margin-top: 0px; 
 			
-			strong#following { font-size: 28px }
-			strong#followers { font-size: 28px }
+			strong#following { font-size: 16px }
+			strong#followers { font-size: 16px }
 			
 			a { color: #222; text-decoration: none; }
 			
@@ -354,6 +354,42 @@ h1, h2, h3, h4, h5 {
 
 #crossriderInstallButton {
 	margin-top: 20px;
+}
+
+#new-form {
+	margin: 20px;
+	padding: 20px 10px;
+	background: white;
+	border: 1px solid #C2C2C2;
+	@include border-radius(4px);
+	min-height: 60px;
+	overflow: hidden;
+	
+	.field {
+		
+		padding-left: 10px;
+		
+		label {
+			margin: 15px 0;
+		}
+		
+		input {
+			margin: 10px 0;
+			width: 600px;
+			height: 20px;
+			padding-left: 5px;
+		}
+	}
+}
+
+#playlist-items {
+	min-height: 90px;
+	padding-left: 75px;
+	padding-top: 10px;
+/*	&:last-child { border-bottom: none };*/
+	border-bottom: 1px solid #EBEBEB;
+	
+
 }
 
 
