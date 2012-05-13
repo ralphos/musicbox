@@ -6,7 +6,11 @@
 	
   <% @songs.each do |song| %>
   <% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
-  <%= image_tag artist.images['large'], style: 'float: left; width: 60px; @include border-radius(4px); margin-top: 10px;' %>
+	<% if artist.images['large'] == "" %>
+		<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png", style: 'float: left; width: 60px; @include border-radius(4px); margin-top: 10px;' %>
+	<% else %>
+		<%= image_tag artist.images['large'], style: 'float: left; width: 60px; @include border-radius(4px); margin-top: 10px;' %>
+	<% end %>
   <div id="playlist-items">
     <h3><%= song.name %></h3>
     <p><%= song.artist %></p>
