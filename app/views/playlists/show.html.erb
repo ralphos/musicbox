@@ -9,10 +9,75 @@
     <h3><%= song.name %></h3>
     <h4><%= link_to song.artist, artist.url %></h4>
     <h6>Tagged by: <%= link_to current_user.name, user_path(current_user) %></h6>
-    <audio controls="controls">
-      <source src="<%= song.link %>" type="audio/mp3" />
-      Your browser does not support the audio tag.
-    </audio>
+    <% if is_number?(song.link) %>
+						        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
+		<% else %>
+			<%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{song.id}", :style => 'max-width: 50px;' %>
+		<% end %>
   </div><!-- //song -->
 <% end %>
 </div><!-- //songs -->
+
+<script type="text/javascript">
+
+var song_links = [ 
+		<% @songs.each do |song| %>
+			{
+				id: "<%= song.id %>",
+				name: "<%= song.name %>",
+				artist: "<%= song.artist %>",
+				link: "<%= song.link %>"
+		  }
+			<% if song != @songs.last %>,<% end %>
+		<% end %>
+];
+
+var audioElement = document.createElement('audio');
+var status = "pause";
+var source = "";
+var play_src = "http://marketingtech101.com/images/play-button-1.png";
+var pause_src = "http://cdn1.iconfinder.com/data/icons/defaulticon/icons/png/256x256/media-pause.png";
+var id = "";
+
+$('.song_control').click(function(){
+	var new_id = $(this).attr('id');
+	
+	var len = song_links.length;
+	for(var i=0; i < len; i++){
+		if (song_links[i]['id'] == new_id){
+			var new_source = song_links[i]['link'];
+			var artist = song_links[i]['artist'];
+			var name = song_links[i]['name'];
+		}
+	}
+	
+	if (new_source == source){
+		if (status == "pause"){
+			audioElement.play();
+			status = "play";
+			$('#'+id).attr('src', pause_src);
+			$("#now_playing").html('Now playing: '+name+' by '+artist);
+		}
+		else{
+			audioElement.pause();
+			status = "pause";
+			$('#'+id).attr('src', play_src);
+			$("#now_playing").html('Paused: '+name+' by '+artist);
+		}
+	}
+	else if (new_source != source){
+		audioElement.setAttribute('src', new_source);
+		source = new_source;
+		audioElement.play();
+		status = "play";
+		$('#'+new_id).attr('src', pause_src);
+		$("#now_playing").html('Now playing: '+name+' by '+artist);
+		$('#'+id).attr('src', play_src);
+		id = new_id;
+	}
+});
+
+
+
+
+</script>
