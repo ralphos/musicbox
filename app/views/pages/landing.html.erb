@@ -7,30 +7,36 @@
 <% end %>
 </header>
 
-<% if !user_signed_in? %>
-	<div class='twitter-login'>
-	  <%= link_to('Twitter Login', signin_twitter_path)  %>  
-	</div>
-	<div class='facebook-login'>
-	  <%= link_to('Facebook Login', signin_facebook_path)  %>
-	</div>
-<% end %>
 
-<h1>Discovering what your world is listening to</h1>
+<div class="headline">
+	<h1>Discover new music with friends</h1>
+	<h3>Musicbox is a social music app that lets you share the music you find from the web.</h3>
+</div><!-- //headline -->
 
-<h4 id="now_playing"></h4>
-<ul style="display: inline-block; list-style-type: none;">
-<% @songs.each do |song| %>
-	<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
-	<li class="song_preview" id="<%= song.id %>" style="float: left; padding: 5px;">
-		<%= image_tag artist.images['large'] %><br />
-		<%= song.name %><br />
-		<em>by</em> <%= song.artist %>
-	</li>
-<% end %>
-</ul>
+<div class='login-buttons'>
+	<% if !user_signed_in? %>
+		<div class='twitter-login'>
+		  <%= link_to (image_tag 'Twitter.png', height: 60), signin_twitter_path %>  
+		</div>
+		<div class='facebook-login'>
+		  <%= link_to (image_tag 'Facebook.png', height: 60), signin_facebook_path  %>
+		</div>
+	<% end %>
+</div>
 
-<div id="crossriderInstallButton"></div>
+<div class="latest-songs">
+	<h4 id="now_playing"></h4>
+	<ul style="display: inline-block; list-style-type: none;">
+	<% @songs.each do |song| %>
+		<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
+		<li class="song_preview" id="<%= song.id %>" style="float: left; padding: 5px;">
+			<%= image_tag artist.images['large'], height: 90 %><br />
+			<%= song.name %><br />
+			<em>by <%= song.artist %></em>
+		</li>
+	<% end %>
+	</ul>
+</div><!-- //latest-songs -->
 
 <script type="text/javascript" src="https://crossrider.cotssl.net/javascripts/installer/installer.js"></script>
 

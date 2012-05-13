@@ -43,14 +43,13 @@ h1, h2, h3, h4, h5 {
 			&:first-child { padding-right: 30px}
 			
 			a {
-				color: #1F76F9;
+				color: whiteSmoke;
 				text-decoration: none;
 				background-image: -webkit-linear-gradient(bottom, #1F76D9 0%, #4B9FDB 100%);
 				padding: 5px 10px;
 				@include border-radius(2px);
 				font-weight: bold;
 				font-size: 12px;
-				&:first-child { color: whiteSmoke };
 			}
 		}	
 	}
@@ -58,7 +57,7 @@ h1, h2, h3, h4, h5 {
 
 .main {
 	width: 700px;
-	min-height: 600px;
+	min-height: 520px;
 	margin: auto;
 	margin-top: 80px;
 	background-color: whiteSmoke;
@@ -80,6 +79,54 @@ h1, h2, h3, h4, h5 {
 			text-shadow: 0px 1px 3px #666;
 		}
 	}
+	
+	.headline {
+		
+		h1 {
+			text-align: center;
+			font-size: 32px;
+			margin-top: 30px;
+		}
+		
+		h3 {
+			text-align: center;
+			color: #474747;
+			margin-top: 5px;
+		}
+	}
+	
+	.login-buttons {
+		width: 470px;
+		margin: 20px auto 15px;
+		.twitter-login {
+			display: inline-block;
+		}
+		.facebook-login {
+			display: inline-block;
+		}
+	}
+	
+	.latest-songs {
+		width: 660px;
+		margin: auto;
+		
+		h4 {
+			text-align: center;
+			margin-bottom: 15px;
+		}
+		
+		ul {
+			margin: 0;
+			
+			li {
+				em {
+					color: gray;
+				}
+			}
+		}
+	}
+	
+	
 	.songs {
 		margin: 20px;
 		background: white;
@@ -185,8 +232,12 @@ h1, h2, h3, h4, h5 {
 	input {
 		align:center;
 		size:40;
-		}
 	}
+}
+
+#crossriderInstallButton {
+	margin-top: 20px;
+}
 
 
 
