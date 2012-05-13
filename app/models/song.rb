@@ -15,6 +15,8 @@
 class Song < ActiveRecord::Base
   attr_accessible :artist, :link, :name, :user_id
   
+  validates :artist, :presence => true
+  
   has_and_belongs_to_many :playlists
   belongs_to :user
   
@@ -32,10 +34,10 @@ class Song < ActiveRecord::Base
     end
   end
   
-  def self.from_users_followed_by(user)
-      followed_user_ids = user.followed_user_ids.join(', ')
-      where("user_id IN (?) OR user_id = ?", followed_user_ids, user)
-  end
+  # def self.from_users_followed_by(user)
+  #     followed_user_ids = user.followed_user_ids.join(', ')
+  #     where("user_id IN (?) OR user_id = ?", followed_user_ids, user)
+  # end
   
   private
 
