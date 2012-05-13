@@ -62,7 +62,7 @@ class SongsController < ApplicationController
   end
   
   def play
-    songs_unsorted = current_user.songs.order('created_at DESC')
+    songs_unsorted = current_user.feed.order('created_at DESC')
     @songs = get_grooveshark_songs(songs_unsorted)
   end
 

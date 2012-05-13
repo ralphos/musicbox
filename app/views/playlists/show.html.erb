@@ -1,13 +1,14 @@
-<header>
-<h1>Musicbox</h1>
-</header>
-
 <div class="songs">
+	<h3>Here's your <em><%= @playlist.title %></em> playlist</h3>
+	<center class="song">
+		<object width="250" height="250"><param name="movie" value="http://grooveshark.com/widget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= @songs_string %>&bbg=474747&bth=B4D5DA&pfg=ffffff&lfg=B4D5DA&bt=813B45&pbg=813B45&pfgh=813B45&si=813B45&lbg=813B45&lfgh=813B45&sb=813B45&bfg=B1BABF&pbgh=B1BABF&lbgh=B1BABF&sbh=B1BABF&p=0" /><embed src="http://grooveshark.com/widget.swf" type="application/x-shockwave-flash" width="250" height="250" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= @songs_string %>&bbg=474747&bth=B4D5DA&pfg=ffffff&lfg=B4D5DA&bt=813B45&pbg=813B45&pfgh=813B45&si=813B45&lbg=813B45&lfgh=813B45&sb=813B45&bfg=B1BABF&pbgh=B1BABF&lbgh=B1BABF&sbh=B1BABF&p=0" allowScriptAccess="always" wmode="window" /></object>
+	</center>
   <% @songs.each do |song| %>
   <div class="song">
     <% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
     <h3><%= song.name %></h3>
     <h4><%= link_to song.artist, artist.url %></h4>
+		<%= image_tag artist.images['large'] %>
     <h6>Tagged by: <%= link_to current_user.name, user_path(current_user) %></h6>
     <% if is_number?(song.link) %>
 						        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= song.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>

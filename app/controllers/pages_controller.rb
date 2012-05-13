@@ -4,8 +4,6 @@ class PagesController < ApplicationController
     @songs = Song.order('created_at DESC').limit(5)
   end
 
-
-  
   def get_song
     link = params[:link]
     @song = Song.new
