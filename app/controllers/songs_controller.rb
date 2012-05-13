@@ -3,7 +3,7 @@ require 'json'
 
 class SongsController < ApplicationController
   
-  def index
+  def index    
     if params[:search]
       @songs=Song.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
     else
@@ -52,6 +52,10 @@ class SongsController < ApplicationController
       song=Song.find_by_id(params[:id])
       song.delete
       redirect_to songs_path
+  end
+  
+  def feed
+    @feed_items = current_user.feed
   end
 
 end

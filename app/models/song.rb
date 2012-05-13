@@ -18,7 +18,11 @@ class Song < ActiveRecord::Base
   has_and_belongs_to_many :playlists
   belongs_to :user
   
-  scope :newest, order('created_at desc')
+  default_scope order: 'songs.created_at DESC'
+
+  # Returns songs from the users being followed by the given user.
+  scope :from_users_followed_by, lambda { |user| followed_by(user) }
+  
   
   def self.search(search)
     if search
@@ -27,4 +31,23 @@ class Song < ActiveRecord::Base
       find(:all)
     end
   end
+  
+  def self.from_users_followed_by(user)
+      followed_user_ids = user.followed_user_ids.join(', ')
+      where("user_id IN (?) OR user_id = ?", followed_user_ids, user)
+  end
+  
+  private
+
+  # Returns an SQL condition for users followed by the given user.
+  # We include the user's own id as well.
+  
+  def self.followed_by(user)
+       followed_user_ids = %(SELECT followed_id FROM relationships
+                          WHERE follower_id = :user_id)
+    where("user_id IN (#{followed_user_ids}) OR user_id = :user_id",
+          { user_id: user })
+  end
+  
+    
 end

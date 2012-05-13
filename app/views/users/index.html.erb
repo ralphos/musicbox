@@ -8,8 +8,7 @@
 <% @users.each do |user| %>
 	<li>
 		<%= image_tag user.pic %>
-		<%= user.name %>
-		| <%= link_to "Follow" %>
+		<%= link_to user.name, user_path(user) %>
 	</li>
 <% end %>
 </ul>

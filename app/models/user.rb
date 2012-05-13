@@ -58,5 +58,9 @@ class User < ActiveRecord::Base
     end
   end
   
+  def feed
+      Song.from_users_followed_by(self)
+  end
+  
 end
 
