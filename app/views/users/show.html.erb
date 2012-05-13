@@ -2,15 +2,7 @@
   <h1>Musicbox</h1>
 </header>
 
-<div class="search">
-<%= form_tag user_path(current_user.id), :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search your playlists", :name => nil %>
-  </p>
-<%= link_to :back %>
-<%end%>
-</div>
+
 
 <div class="profile-header">
   <%= image_tag @user.pic %>
@@ -31,10 +23,20 @@
   <% if @playlists.empty? %>
   <p>You have no music. <%= link_to 'Add some', new_song_path %></p>
   <% else %>
+  
+  <div class="search">
+  <%= form_tag user_path(current_user.id), :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search playlists", :name => nil, class: 'search-btn' %>
+    </p>
+    <%end%>
+  </div>
+  
     <% @playlists.each do |playlist| %>
     <div class="playlist">
       <h3><%= link_to playlist.title, playlist_path(playlist) %></h3>
-      <h4>by <%= playlist.user.name %></h4>
+      <h4><%= pluralize(playlist.songs.count, 'song') %></h4>
     </div><!-- //playlist -->
   <% end %>
 <% end %>

@@ -6,15 +6,22 @@
 <div class="feed">
   <% @feed_items.each do |item| %>
   <div class="feed_item">
-    <h3><%= item.name %></h3>
-		<h6>Tagged by: <%= link_to item.user.name, user_path(item.user) %></h6>
-		<% if item.playlists.any? %>
-		<p>Playlists: 
-			<% item.playlists.each do |playlist| %>
-				<%= link_to playlist.title, playlist_path(playlist.id) %>
-			<% end %>
-		</p>
-		<% end %>
-  </div><!-- //feed -->
+    <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>
+    <%= image_tag artist.images['medium'] %>
+    <div class="item-details">
+      <h3><%= item.name %></h3>
+      <p><%= item.artist %><p>
+  		<h5>  
+  		  <span>Added by:</span> <%= link_to item.user.name, user_path(item.user) %> 
+  		  <% if item.playlists.any? %>
+  		    <span> to:</span>
+  		    <% item.playlists.each do |playlist| %>
+  		    <%= link_to playlist.title, playlist_path(playlist) %>
+  		    <% end %>
+  		  <% end %>
+  		  </h5>
+		</div><!-- //item-details -->
+	</div><!-- //feed_item -->
 <% end %>
-</div><!-- //feed_item -->
+</div><!-- //feed -->
+
