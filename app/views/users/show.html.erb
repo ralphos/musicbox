@@ -1,7 +1,7 @@
 <div class="profile-header">
   <%= image_tag @user.pic %>
   <div class="name-section">
-    <h3><%= @user.name %><br><span>You have <%= link_to "#{@user.songs.count} songs", songs_path %> and <%= @user.playlists.count %> playlists.</span></h3>
+    <h3><%= @user.name %><br><span>You have <%= link_to (pluralize(@user.songs.count, 'song')), songs_path %> and <%= link_to (pluralize(@user.playlists.count, 'playlist')), playlists_path %>.</span></h3>
   </div>
  <div class="stats">
         <%= render 'shared/stats' %>

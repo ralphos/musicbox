@@ -1,5 +1,5 @@
 
-<div class="feed">
+<div id="new-form">
 <%= form_for(@song) do|form|%>
 
 	 <%= form.hidden_field :user_id, :value=>current_user.id%>
@@ -7,12 +7,12 @@
 	 <%= form.label :name, "Song Name:"%>
 	 </div>
 	 <div class="field">
-	 <%= form.text_field :name, :value => params[:name], placeholder %>
+	 <%= form.text_field :name, :value => params[:name] %>
 	 </div>
 	 <div class="field">
 	 <%= form.label :artist, "Artist:"%>
 	 </div>
-	 <div>
+	 <div class="field">
 	 <%= form.text_field :artist, :value => params[:artist] %>
 	 </div>
 	 <div class="field">
@@ -30,12 +30,10 @@
 	 </div>
 
 	
-	<%= form.submit "Add Song" %>
+	<%= form.submit "Add Song", id: 'add-song-btn' %>
 
 	
 <% end %>
-
-<%= link_to "Back", songs_path%>
 </div>
 
 <script>
