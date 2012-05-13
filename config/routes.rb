@@ -1,10 +1,21 @@
 Musicbox::Application.routes.draw do
 
+  get "relationships/create"
+
+  get "relationships/destroy"
+
   root :to => 'pages#landing'
 
   resources :songs
-  resources :users
+  resources :users do
+      member do
+        get :following, :followers
+      end
+    end
+    
   resources :playlists
+  
+  resources :relationships, only: [:create, :destroy]
   
   match '/auth/:provider/callback' => 'sessions#create'
   match '/auth/failure' => 'sessions#failure'

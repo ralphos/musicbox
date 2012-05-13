@@ -1,0 +1,23 @@
+<header>
+	<h1>Musicbox</h1>
+</header>
+
+<p>Showing <%= pluralize(@users.count, 'user') %></p>
+
+<ul>
+<% @users.each do |user| %>
+	<li>
+		<%= image_tag user.pic %>
+		<%= user.name %>
+		<% unless current_user == user %>
+		  <div id="follow_form">
+		  <% if current_user.following?(@user) %>
+		    <%= render 'unfollow' %>
+		  <% else %>
+		    <%= render 'follow' %>
+		  <% end %>
+		  </div>
+		<% end %>
+	</li>
+<% end %>
+</ul>

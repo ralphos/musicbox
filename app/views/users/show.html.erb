@@ -17,7 +17,14 @@
   <div class="name-section">
     <h3><%= current_user.name %><br><span>You have <%= current_user.songs.count %> songs and <%= current_user.playlists.count %> playlists.</span></h3>
   </div>
+ <div class="stats">
+        <%= render 'shared/stats' %>
+      </div>
+  <div class="follow">
+		<%= render 'follow_form' if user_signed_in? %>
+	</div>
 </div>
+
 
 
 <div class="playlists">
