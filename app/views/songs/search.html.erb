@@ -4,9 +4,11 @@
 <h3><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></h3>
 
 	<% @results.each do |result| %>
+	<% artist = Rockstar::Artist.new(result["ArtistName"], :include_info => true) %>
+  <%= image_tag artist.images['medium'] %>
 	<div class="item-details">
 			<%= result["SongName"] %> by <%= result["ArtistName"] %>
-			| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post %>
+			| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post, style: 'color: #1F76D9' %>
 	</div>
 <% end %>
 

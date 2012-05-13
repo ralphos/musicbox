@@ -1,14 +1,11 @@
-<header>
-	<h1>Musicbox</h1>
-</header>
 
-<p>Showing <%= pluralize(@users.count, 'user') %></p>
-
-<ul>
+<div class="feed">
+  <p>Showing <%= pluralize(@users.count, 'user') %></p>
+  
 <% @users.each do |user| %>
-	<li>
-		<%= image_tag user.pic %>
-		<%= link_to user.name, user_path(user) %>
-	</li>
+<%= image_tag user.pic %>
+  <div class="item-details">
+		<%= link_to user.name, user_path(user), style: 'font-weight: bold' %>
+	</div>
 <% end %>
-</ul>
+</div>

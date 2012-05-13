@@ -4,16 +4,16 @@
 	<h3>Musicbox is a social music app that lets you share the music you find from the web.</h3>
 </div><!-- //headline -->
 
-<div class='login-buttons'>
+<center class='login-buttons'>
 	<% if !user_signed_in? %>
 		<div class='twitter-login'>
-		  <%= link_to (image_tag 'Twitter.png', height: 60), signin_twitter_path %>  
+		  <%= link_to (image_tag 'Twitter.png', width: 200), signin_twitter_path %>  
 		</div>
 		<div class='facebook-login'>
-		  <%= link_to (image_tag 'Facebook.png', height: 60), signin_facebook_path  %>
+		  <%= link_to (image_tag 'Facebook.png', width: 200), signin_facebook_path  %>
 		</div>
 	<% end %>
-</div>
+</center>
 
 <div class="latest-songs">
 	<h4 id="now_playing"></h4>

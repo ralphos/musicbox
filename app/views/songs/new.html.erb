@@ -1,23 +1,36 @@
-<h1> Submit a song </h1>
 
-<div class="form">
+<div class="feed">
 <%= form_for(@song) do|form|%>
 
 	 <%= form.hidden_field :user_id, :value=>current_user.id%>
+	 <div class="field">
 	 <%= form.label :name, "Song Name:"%>
-	 <%= form.text_field :name, :value => params[:name] %><br>
-	
+	 </div>
+	 <div class="field">
+	 <%= form.text_field :name, :value => params[:name], placeholder %>
+	 </div>
+	 <div class="field">
 	 <%= form.label :artist, "Artist:"%>
-	 <%= form.text_field :artist, :value => params[:artist] %><br>
-	
+	 </div>
+	 <div>
+	 <%= form.text_field :artist, :value => params[:artist] %>
+	 </div>
+	 <div class="field">
 	 <%= form.label :link, "Link:"%>
-	 <%= form.text_field :link, :value => params[:link] %><br>
+	 </div>
+	 <div class="field">
+	 <%= form.text_field :link, :value => params[:link] %>
+	 </div>
 	
+	 <div class="field">
 	 <%= label_tag 'Playlist: ' %>
-	 <%= text_field_tag :playlist, nil, :id => "playlist", :placeholder => 'Type in a list dude...', :autocomplete => 'off' %><br />
+	 </div>
+	 <div class="field">
+	 <%= text_field_tag :playlist, nil, :id => "playlist", :placeholder => 'Type in a list dude...', :autocomplete => 'off' %>
+	 </div>
 
 	
-	<%= form.submit %>
+	<%= form.submit "Add Song" %>
 
 	
 <% end %>
