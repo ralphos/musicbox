@@ -32,5 +32,9 @@ Musicbox::Application.routes.draw do
   match 'songs/show'=>'songs#show' #=> will reroute this once relation with playlists defined
   
   post '/song_search' => 'songs#search'
+  
+  post '/add-song' => 'songs#new'
+  
+  get '/play' => 'songs#play', :as => :play_all
 
 end

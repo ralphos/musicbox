@@ -8,10 +8,10 @@
 
 	 <%= form.hidden_field :user_id, :value=>current_user.id%>
 	 <%= form.label :name, "Song Name:"%>
-	 <%= form.text_field :name%><br>
+	 <%= form.text_field :name, :value => params[:name] %><br>
 	
 	 <%= form.label :artist, "Artist:"%>
-	 <%= form.text_field :artist%><br>
+	 <%= form.text_field :artist, :value => params[:artist] %><br>
 	
 	 <%= form.label :link, "Link:"%>
 	 <%= form.text_field :link, :value => params[:link] %><br>

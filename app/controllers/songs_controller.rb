@@ -3,6 +3,8 @@ require 'json'
 
 class SongsController < ApplicationController
   
+  include SongsHelper
+  
   def index    
     if params[:search]
       @songs=Song.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
@@ -42,6 +44,7 @@ class SongsController < ApplicationController
 
   def search
     @q = params[:search]
+    @q = @q.gsub(' ', '%20')
     access_token = "30481e86e78f0aee64e78765c33c4ef6"
     
     @results = JSON.parse(open("http://tinysong.com/s/#{@q}?format=json&limit=10&key=#{access_token}").read)
@@ -56,6 +59,11 @@ class SongsController < ApplicationController
   
   def feed
     @feed_items = current_user.feed
+  end
+  
+  def play
+    songs_unsorted = current_user.songs.order('created_at DESC')
+    @songs = get_grooveshark_songs(songs_unsorted)
   end
 
 end

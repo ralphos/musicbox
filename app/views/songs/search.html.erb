@@ -1,11 +1,11 @@
-<p><%= pluralize(@results.count, 'result') %> for <%= @q %></p>
+<p><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></p>
 
 <ul>
 	<% @results.each do |result| %>
 		<li>
 			<%= result["SongName"] %> by <%= result["ArtistName"] %>
-			| <%= link_to 'Add', "/add-song?link=#{result['Url']}" %>
-			
+			| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post %>
 		</li>
 	<% end %>
 </ul>
+

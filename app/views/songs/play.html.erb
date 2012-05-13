@@ -1,0 +1,11 @@
+<header>
+<h1>Musicbox</h1>
+<%= form_tag('/song_search', :method => :post) do %>
+	<%= text_field_tag :search %>
+	<%= submit_tag "Add a song" %>
+<% end %>
+</header>
+
+<p>Play all of your songs <%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png", style: 'max-width: 100px;'%></p>
+
+<object width="250" height="250"><param name="movie" value="http://grooveshark.com/widget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= @songs %>&bbg=474747&bth=B4D5DA&pfg=ffffff&lfg=B4D5DA&bt=813B45&pbg=813B45&pfgh=813B45&si=813B45&lbg=813B45&lfgh=813B45&sb=813B45&bfg=B1BABF&pbgh=B1BABF&lbgh=B1BABF&sbh=B1BABF&p=0" /><embed src="http://grooveshark.com/widget.swf" type="application/x-shockwave-flash" width="250" height="250" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= @songs %>&bbg=474747&bth=B4D5DA&pfg=ffffff&lfg=B4D5DA&bt=813B45&pbg=813B45&pfgh=813B45&si=813B45&lbg=813B45&lfgh=813B45&sb=813B45&bfg=B1BABF&pbgh=B1BABF&lbgh=B1BABF&sbh=B1BABF&p=0" allowScriptAccess="always" wmode="window" /></object>
