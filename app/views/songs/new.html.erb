@@ -4,22 +4,22 @@
 
 	 <%= form.hidden_field :user_id, :value=>current_user.id%>
 	 <div class="field">
-	 <%= form.label :name, "Song Name:"%>
+	 <%= form.label :name, "Song Name: #{params[:name]}"%>
 	 </div>
 	 <div class="field">
-	 <%= form.text_field :name, :value => params[:name] %>
+	 <%= form.hidden_field :name, :value => params[:name] %>
 	 </div>
 	 <div class="field">
-	 <%= form.label :artist, "Artist:"%>
+	 <%= form.label :artist, "Artist: #{params[:artist]}"%>
 	 </div>
 	 <div class="field">
-	 <%= form.text_field :artist, :value => params[:artist] %>
+	 <%= form.hidden_field :artist, :value => params[:artist] %>
 	 </div>
 	 <div class="field">
-	 <%= form.label :link, "Link:"%>
+	 <%= form.label :link, "Link: #{params[:link]}"%>
 	 </div>
 	 <div class="field">
-	 <%= form.text_field :link, :value => params[:link] %>
+	 <%= form.hidden_field :link, :value => params[:link] %><br />
 	 </div>
 	
 	 <div class="field">

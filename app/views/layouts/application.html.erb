@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application" %>
 	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" %>
   <%= csrf_meta_tags %>
+	<%= favicon_link_tag %>
 </head>
 <body>
 
@@ -24,6 +25,6 @@
 </div><!-- //wrapper -->
 </body>
 <footer>
-<%= link_to "About Us", about_us_url %>
+<%= link_to "About Us", about_us_url %> | <%= link_to "Feedback for us", "http://clicktotweet.com/iD716", target: '_blank' %>
 </footer>
 </html>

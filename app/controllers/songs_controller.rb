@@ -3,6 +3,8 @@ require 'json'
 
 class SongsController < ApplicationController
   
+  before_filter :authenticate_user!
+  
   include SongsHelper
   
   def index    

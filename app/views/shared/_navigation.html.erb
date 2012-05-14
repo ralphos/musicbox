@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <div class="search-bar">
   <%= form_tag users_path, :method => 'get' do %>
-	    <%= text_field_tag :search, params[:search], placeholder: "Search users..." %>
+	    <%= text_field_tag :search, params[:search], placeholder: "Search users...", :autocomplete => "off" %>
 	<% end %>
 </div>
 <ul>
@@ -12,5 +12,19 @@
   </li>
 </ul>
 <% end %>
+
+<script>
+	$(function() {
+		var availableTags = [
+			<% User.all.each do |user| %>
+				"<%= user.name %>"
+				<% if user != User.all.last %>,<% end %>
+			<% end %>
+		];
+		$( "#search" ).autocomplete({
+			source: availableTags
+		});
+	});
+</script>
 
 

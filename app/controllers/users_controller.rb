@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   
+  before_filter :authenticate_user!
+  
   def show
     @user = User.find(params[:id])
     if params[:search]
@@ -11,7 +13,7 @@ class UsersController < ApplicationController
   
   def index
    if params[:search]
-      @users=User.find(:all, :conditions=>['name LIKE ?', "%#{params[:search]}%"])
+      @users=User.find(:all, :conditions=>['name LIKE ?', "%#{params[:search].downcase}%"])
     else
       @users = User.order('created_at desc')
     end

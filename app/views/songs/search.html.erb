@@ -1,19 +1,25 @@
 
 <div class="feed">
 
-<h3><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></h3>
-
-	<% @results.each do |result| %>
-	<% artist = Rockstar::Artist.new(result["ArtistName"], :include_info => true) %>
-  <% if artist.images['large'] == "" %>
-		<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png" %>
-	<% else %>
-		<%= image_tag artist.images['medium'] %>
-	<% end %>
+<% if @results.nil? %>
 	<div class="item-details">
-			<%= result["SongName"] %> by <%= result["ArtistName"] %>
-			| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post, style: 'color: #1F76D9' %>
+		<p>No songs found.  Try again partner.</p>
 	</div>
+<% else %>
+	<h3><%= pluralize(@results.count, 'result') %> for <%= @q.gsub('%20', ' ') %></h3>
+	<% @results.each do |result| %>
+		<% artist = Rockstar::Artist.new(result["ArtistName"], :include_info => true) %>
+		<% puts artist.images.nil? %>
+	  <% if artist.images.nil? %>
+			<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png" %>
+		<% else %>
+			<%= image_tag artist.images['medium'] %>
+		<% end %>
+		<div class="item-details">
+				<%= result["SongName"] %> by <%= result["ArtistName"] %>
+				| <%= link_to 'Add', "/add-song?link=#{result['SongID']}&name=#{result['SongName']}&artist=#{result['ArtistName']}", :method => :post, style: 'color: #1F76D9' %>
+		</div>
+	<% end %>
 <% end %>
 
 </div><!-- //feed -->
