@@ -15,7 +15,7 @@ Musicbox::Application.routes.draw do
   
   resources :relationships, only: [:create, :destroy]
   
-  get "/pages/about"=>"pages#about"
+  match "/pages/about" => "pages#about", :as => :about_us
   
   get "relationships/create"
 
