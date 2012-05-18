@@ -1,36 +1,42 @@
 
 <div class="feed">
   
-  <h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %> / <%= link_to "Play all", play_all_path %>
-  </h3>
-  <% @feed_items.each do |item| %>
-  <div class="feed_item">
-    <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>
-    <% if artist.images['large'] == "" %>
-			<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png" %>
-		<% else %>
-			<%= image_tag artist.images['medium'] %>
-		<% end %>
-    <div class="item-details">
-      <h3><%= item.name %></h3>
-      <p><%= item.artist %><p>
-  		<h5>  
-  		  <span>Added by:</span> <%= link_to item.user.name, user_path(item.user) %> 
-  		  <% if item.playlists.any? %>
-  		    <span> to:</span>
-  		    <% item.playlists.each do |playlist| %>
-  		    <%= link_to playlist.title, playlist_path(playlist) %>
-  		    <% end %>
-  		  <% end %>
-  		  </h5>
-				<% if is_number?(item.link) %>
-								        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
-				<% else %>
-          <!-- <%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{item.id}", :style => 'max-width: 50px;' %> -->
-				<% end %>
-		</div><!-- //item-details -->
-	</div><!-- //feed_item -->
-<% end %>
+  
+	<% if @feed_items.empty? %>
+		<br />
+		<center>No songs yet in your feed...add songs by typing in the name in the search box above</center>
+	<% else %>
+		<h3><%= link_to 'Your Feed', feed_path %> / <%= link_to 'Your Songs', songs_path %> / <%= link_to "Play all", play_all_path %>
+	  </h3>
+  	<% @feed_items.each do |item| %>
+	  <div class="feed_item">
+	    <% artist = Rockstar::Artist.new(item.artist, :include_info => true) %>
+	    <% if artist.images['large'] == "" %>
+				<%= image_tag "http://cdn1.iconfinder.com/data/icons/devine_icons/Black/PNG/System%20and%20Internet/Speaker%20and%20Sound.png" %>
+			<% else %>
+				<%= image_tag artist.images['medium'] %>
+			<% end %>
+	    <div class="item-details">
+	      <h3><%= item.name %></h3>
+	      <p><%= item.artist %><p>
+	  		<h5>  
+	  		  <span>Added by:</span> <%= link_to item.user.name, user_path(item.user) %> 
+	  		  <% if item.playlists.any? %>
+	  		    <span> to:</span>
+	  		    <% item.playlists.each do |playlist| %>
+	  		    <%= link_to playlist.title, playlist_path(playlist) %>
+	  		    <% end %>
+	  		  <% end %>
+	  		  </h5>
+					<% if is_number?(item.link) %>
+									        <object width="250" height="40"><param name="movie" value="http://grooveshark.com/songWidget.swf" /><param name="wmode" value="window" /><param name="allowScriptAccess" value="always" /><param name="flashvars" value="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" /><embed src="http://grooveshark.com/songWidget.swf" type="application/x-shockwave-flash" width="250" height="40" flashvars="hostname=cowbell.grooveshark.com&songIDs=<%= item.link %>&style=metal&p=0" allowScriptAccess="always" wmode="window" /></object>
+					<% else %>
+	          <!-- <%= image_tag "http://marketingtech101.com/images/play-button-1.png", :class => "song_control", :id => "#{item.id}", :style => 'max-width: 50px;' %> -->
+					<% end %>
+			</div><!-- //item-details -->
+		</div><!-- //feed_item -->
+	<% end %>
+	<% end %>
 </div><!-- //feed -->
 
 <script type="text/javascript">

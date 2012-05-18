@@ -3,7 +3,7 @@
 	<% if user_signed_in? %>
 	<div class="search-grooveshark" style="float: right">
   	<%= form_tag('/song_search', :method => :post) do %>
-  			<%= text_field_tag :search, nil, placeholder: "Search Songs on Grooveshark..." %>
+  			<%= text_field_tag :search, nil, placeholder: "Add Songs from Grooveshark..." %>
   	<% end %>
   </div>
   <% end %>
