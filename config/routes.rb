@@ -15,7 +15,4 @@ Musicbox::Application.routes.draw do
   
   post '/get-song' => 'pages#get-song'
   
-  match '/songs/new'=>'songs#new', :as=> :new_song
-  
-
 end

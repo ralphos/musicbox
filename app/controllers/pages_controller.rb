@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   def landing
+    @songs = Song.limit(10)
   end
 
 
