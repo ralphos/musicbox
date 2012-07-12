@@ -9,6 +9,9 @@ gem 'thin'
 gem 'annotate', '~> 2.4.1.beta'
 
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+gem 'bourbon'
 
 group :development do
   gem 'sqlite3'

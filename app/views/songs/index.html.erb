@@ -1,17 +1,23 @@
 <header>
-<h1>Your Songs </h1>
+<h1>Musicbox</h1>
 </header>
 
-<% @songs.each do|song|%>
-<%= song.name%><br>
-<%= song.artist%><br>
-<audio controls="controls">
-  <source src="<%=song.link%>" type="audio/mp3" />
-  Your browser does not support the audio tag.
-</audio>
-<br><br><hr>
+<div class="songs">
+  <% @songs.each do|song| %>
+  <div class="song">
+    <h3><%= song.name %></h3>
+    <h4><%= song.artist %></h4>
+    <audio controls="controls">
+      <source src="<%=song.link%>" type="audio/mp3" />
+      Your browser does not support the audio tag.
+    </audio>
+  </div><!-- //song -->
+<% end %>
+</div><!-- //songs -->
+
+<div class="new-song" style="width: 100px; margin: auto">
+  <%= link_to "Add a Song", new_song_url %>
+</div>
 
 
-<%end%>
 
-<%=link_to "Add a Song", new_song_url%>

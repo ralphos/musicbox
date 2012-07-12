@@ -1,7 +1,11 @@
 class SessionsController < ApplicationController
 
-  def new
+  def new_twitter
     redirect_to '/auth/twitter'
+  end
+  
+  def new_facebook
+    redirect_to '/auth/facebook'
   end
   
   def create
