@@ -3,12 +3,12 @@
 </header>
 
 <div class="songs">
-  <% @songs.each do|song| %>
+  <% current_user.songs.each do |song| %>
   <div class="song">
-		<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
+    <% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
     <h3><%= song.name %></h3>
     <h4><%= link_to song.artist, artist.url %></h4>
-		<h6>Tagged by: <%= link_to song.users.first.name, "/user/#{song.users.first}" %></h6>
+    <h6>Tagged by: <%= link_to song.users.first, "/user/#{song.users.first}" %></h6>
     <audio controls="controls">
       <source src="<%= song.link %>" type="audio/mp3" />
       Your browser does not support the audio tag.
@@ -16,10 +16,3 @@
   </div><!-- //song -->
 <% end %>
 </div><!-- //songs -->
-
-<div class="new-song" style="width: 100px; margin: auto">
-  <%= link_to "Add a Song", new_song_url %>
-</div>
-
-
-

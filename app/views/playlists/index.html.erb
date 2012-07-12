@@ -1,0 +1,10 @@
+<h1>Playlists Index</h1>
+
+<div class="playlists">
+  <% @playlists.each do |playlist| %>
+  <div class="playlist">
+    <h3><%= link_to playlist.title, playlist_path(playlist) %></h3>
+    <h4>by <%= playlist.user.name %></h4>
+  </div><!-- //playlist -->
+<% end %>
+</div><!-- //playlists -->

@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :provider, :uid
   
-  has_many :songs
+  has_many :playlists
+  has_many :songs, :through => :playlists
   
   def self.create_with_omniauth(auth)
     create! do |user|

@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   
   def index
-    @songs = Song.where(:user_id => current_user.id).newest
+    @songs = current_user.songs
   end
   
   def new
