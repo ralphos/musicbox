@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20120712162643) do
     t.datetime "updated_at", :null => false
   end
 
-
   create_table "songs", :force => true do |t|
     t.string   "artist"
     t.string   "name"

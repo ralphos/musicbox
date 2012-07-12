@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :name, :provider, :uid
+  attr_accessible :email, :name, :provider, :uid, :pic
   
   has_many :playlists
   has_many :songs, :through => :playlists

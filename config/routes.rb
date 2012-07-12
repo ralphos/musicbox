@@ -3,6 +3,7 @@ Musicbox::Application.routes.draw do
   root :to => 'pages#landing'
 
   resources :songs
+  resources :users
   resources :playlists
   
   match '/auth/:provider/callback' => 'sessions#create'

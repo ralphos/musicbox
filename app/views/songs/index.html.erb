@@ -8,7 +8,7 @@
 		<% artist = Rockstar::Artist.new(song.artist, :include_info => true) %>
     <h3><%= song.name %></h3>
     <h4><%= link_to song.artist, artist.url %></h4>
-		<h6>Tagged by: <%= link_to song.users.first.name, "/user/#{song.users.first}" %></h6>
+		<h6>Tagged by: <%= link_to current_user.name, user_path(current_user) %></h6>
 		<%= image_tag artist.images['medium'] %>
 		<a id="<%= song.id %>" class= "play">></a> <a id="<%= song.id %>" class="pause">||</a>
   </div><!-- //song -->

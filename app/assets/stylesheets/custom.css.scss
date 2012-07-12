@@ -29,7 +29,6 @@ h1, h2, h3, h4, h5 {
 	background: rgba(71, 71, 71, 0.95);
 	color: #222;
 	font-weight: bold;
-	text-shadow: 0px 1px 1px #222;
 	border-bottom: 1px solid #222;
 	@include box-shadow(0 0 3px 1px rgba(0, 0, 0, 0.2));
 	
@@ -49,10 +48,9 @@ h1, h2, h3, h4, h5 {
 				background-image: -webkit-linear-gradient(bottom, #1F76D9 0%, #4B9FDB 100%);
 				padding: 5px 10px;
 				@include border-radius(2px);
-				color: #0B2440;
-				text-shadow: 0 1px 1px rgba(255, 255, 255, 0.16);
 				font-weight: bold;
 				font-size: 12px;
+				&:first-child { color: whiteSmoke };
 			}
 		}	
 	}
@@ -105,6 +103,52 @@ h1, h2, h3, h4, h5 {
 			}
 		}
 	}	
+	
+	.profile-header {
+		margin: 20px;
+		padding: 10px;
+		background: white;
+		border: 1px solid #C2C2C2;
+		@include border-radius(4px);
+		max-height: 60px;
+
+		.name-section {
+			display: inline-block;
+			padding: 0 0 0 10px;
+			
+			img {
+				float: left;
+			}
+			
+			h3 {
+				margin: 0;
+				float: left;
+				
+				span {
+					font-weight: normal;
+					font-size: 14px;
+				}
+			}
+		}
+	}
+	
+	.playlists {
+		margin: 20px;
+		padding: 10px;
+		background: white;
+		border: 1px solid #C2C2C2;
+		@include border-radius(4px);
+		max-height: 60px;
+		
+		p {
+			text-align: center;
+			
+			a {
+				text-decoration: none;
+				color: #1F76D9;
+			}
+		}
+	}
 }
 
 

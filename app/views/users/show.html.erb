@@ -1,0 +1,25 @@
+<header>
+  <h1>Musicbox</h1>
+</header>
+
+<div class="profile-header">
+  <%= image_tag current_user.pic %>
+  <div class="name-section">
+    <h3><%= current_user.name %><br><span>You have <%= current_user.songs.count %> songs and <%= current_user.playlists.count %> playlists.</span></h3>
+  </div>
+</div>
+
+
+<div class="playlists">
+  <% if @playlists.empty? %>
+  <p>You have no music. <%= link_to 'Add some', new_song_path %></p>
+  <% else %>
+    <% @playlists.each do |playlist| %>
+    <div class="playlist">
+      <h3><%= link_to playlist.title, playlist_path(playlist) %></h3>
+      <h4>by <%= playlist.user.name %></h4>
+    </div><!-- //playlist -->
+  <% end %>
+<% end %>
+</div><!-- //playlists -->
+
