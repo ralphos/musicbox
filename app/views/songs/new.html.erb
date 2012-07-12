@@ -1,0 +1,19 @@
+<h1> Submit a song </h1>
+
+<%= form_for(@song) do|form|%>
+
+	 <%= form.hidden_field :user_id, :value=>current_user.id%>
+	 <%= form.label :name, "Song Name:"%>
+	 <%= form.text_field :name%><br>
+	
+	 <%= form.label :artist, "Artist:"%>
+	 <%= form.text_field :artist%><br>
+	
+	 <%= form.label :link, "Link:"%>
+	 <%= form.text_field :link%><br>
+
+	
+	<%= form.submit%>
+
+	
+<% end %>
